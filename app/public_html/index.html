@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Crypto-Tracker</title>
+</head>
+<body>
+
+<div>
+    <h1>Your Portfolio: <b id="portfolio"></b></h1>
+
+</div>
+<style>
+    table, tr, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    th {
+    background-color: #5d5d5d;
+    color: white;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    }
+</style>
+
+
+<table id="table-container">
+    <th>Currency</th>
+    <th>Price (USD)</th>
+    <th>Change (%)</th>
+</table>
+
+<script>
+// gets zip code from input field, stores in global variable
+
+let table_container = document.getElementById('table-container')	
+let portfolio = document.getElementById('portfolio')	
+
+var intervalID = setInterval(update(), 420000);
+
+function update(){
+    let url = `/crypto`; 
+    //e.log("called")
+    fetch(url).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        removeData()
+        //console.log(data)
+        addData(data)
+    });
+}
+
+function removeData(){
+    let trs = table_container.childElementCount
+        //console.log(trs)
+        for (i = 1; i < trs; i++){
+            table_container.deleteRow(1)
+        }
+}
+
+function addData(data){
+    let crypto_data = data.crypto_data
+    portfolio.textContent = data.portfolio.toFixed(2)
+    for (const [key, value] of Object.entries(crypto_data)) {
+        var tr = document.createElement("tr")
+        var td_currency = document.createElement("td")
+        var td_price = document.createElement("td")
+        var td_change = document.createElement("td")
+        td_currency.textContent = key
+        td_price.textContent = value.price.toFixed(4)
+        td_change.textContent = value.change_24.toFixed(2)
+        tr.appendChild(td_currency)	
+        tr.appendChild(td_price)
+        tr.appendChild(td_change)
+        table_container.appendChild(tr)	
+        if(Math.sign(value.change_24) == -1){
+            tr.style.backgroundColor = "#eb3434"
+        }else{
+            tr.style.backgroundColor = "#34eb6e"
+        }
+    }
+}
+</script>
+
+</body>
+</html>
