@@ -33,20 +33,18 @@
 </table>
 
 <script>
-// gets zip code from input field, stores in global variable
-
 let table_container = document.getElementById('table-container')	
 let portfolio = document.getElementById('portfolio')	
-
-var intervalID = setInterval(update(), 420000);
+update()
+var intervalID = setInterval(update, 600000);
 
 function update(){
     let url = `/crypto`; 
-    //e.log("called")
+    //console.log("called")
+    removeData()
     fetch(url).then(function (response) {
         return response.json();
     }).then(function (data) {
-        removeData()
         //console.log(data)
         addData(data)
     });
@@ -62,7 +60,7 @@ function removeData(){
 
 function addData(data){
     let crypto_data = data.crypto_data
-    portfolio.textContent = data.portfolio.toFixed(2)
+    portfolio.textContent = data.portfolio.toFixed(8)
     for (const [key, value] of Object.entries(crypto_data)) {
         var tr = document.createElement("tr")
         var td_currency = document.createElement("td")
