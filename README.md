@@ -7,7 +7,7 @@ Your amount and type of crypto can be entered into the cryptos.json file using t
 
 To gather the cryptocurrency prices and data the app utilizes the CoinMarketCap API
  * A free account can be made at this website https://coinmarketcap.com/api/
- * Then set the api key in the env.json file
+ * Then set the api key in the ```env.json``` file
  
  Once these steps are complete run the following commands
   * ```cd app/```
