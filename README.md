@@ -1,5 +1,7 @@
-# Crypto-Tracker
-Basic cryptotracker node.js app to follow and track your crypto prices and final portfolio price.
+![CryptoTracker](https://github.com/scrimmie/Crypto-Tracker/blob/master/CryptoTracker_Logo.png?)
+
+
+Basic CryptoTracker node.js app to follow and track your crypto prices and final portfolio price.
 
 Your amount and type of crypto can be entered into the cryptos.json file using their tickers as a key.
 
